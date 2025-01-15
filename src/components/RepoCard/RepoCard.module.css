@@ -1,0 +1,43 @@
+.card {
+    margin-bottom: 16px;
+}
+  
+.cardContent {
+    padding: 16px;
+}
+  
+.typographyTitle {
+    font-size: 1.25rem;
+    font-family: 'Lexend', sans-serif; 
+    font-weight: 600;
+}
+  
+.typographyBody {
+    color: #6c757d;
+    font-family: 'Lexend', sans-serif;
+    font-weight: 500;
+}
+  
+.box {
+    display: flex;
+    align-items: center;
+    margin-top: 8px;
+}
+  
+.buttonLink {
+    margin-right: 16px;
+    font-family: 'Lexend', sans-serif;
+    font-weight: 600;
+}
+
+.buttonDelete {
+    font-family: 'Lexend', sans-serif;
+    font-weight: 600;
+}
+  
+.buttonSave {
+    font-family: 'Lexend', sans-serif;
+    font-weight: 600;
+    margin-left: 5px;
+}
+

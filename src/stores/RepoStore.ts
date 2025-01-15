@@ -1,4 +1,4 @@
-import { makeAutoObservable } from "mobx";
+import { makeAutoObservable, runInAction } from "mobx";
 import axios from "axios";
 
 class RepoStore {
@@ -45,22 +45,31 @@ class RepoStore {
             ownerAvatarUrl: item.owner.avatar_url,
           };
         });
-
-      this.repos = [...this.repos, ...newRepos];
-      this.hasMore = response.data.items.length > 0;
-      this.page += 1;
-      this.error = null;
+      runInAction(() => {
+        this.repos = [...this.repos, ...newRepos];
+        this.hasMore = response.data.items.length > 0;
+        this.page += 1;
+        this.error = null;
+      });
+      
     } catch (error) {
       console.log(error);
-      this.error = "Ошибка при загрузке данных. Попробуйте снова.";
+      runInAction(() => {
+        this.error = "Ошибка при загрузке данных. Попробуйте снова.";
+      });
     } finally {
-      this.loading = false;
+      runInAction(() => {
+        this.loading = false;
+      }); 
     }
   }
 
   removeRepo(id: number) {
-    this.repos = this.repos.filter((repo) => repo.id !== id);
-    this.uniqueIds = this.uniqueIds.filter((uniqueId) => uniqueId !== id);
+    runInAction(()=>{
+      this.repos = this.repos.filter((repo) => repo.id !== id);
+      this.uniqueIds = this.uniqueIds.filter((uniqueId) => uniqueId !== id);
+    });
+   
   }
 
   editRepo(id: number, newName: string) {

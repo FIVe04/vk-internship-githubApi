@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { observer } from "mobx-react-lite";
 import { Card, CardContent, Typography, Button, Box, TextField } from "@mui/material";
 import { repoStore } from "../../stores/RepoStore";
+import styles from "./RepoCard.module.css";
 import LazyImage from "../LazyImage/LazyImage";
 
 interface RepoCardProps {
@@ -42,11 +43,13 @@ const RepoCard: React.FC<RepoCardProps> = observer(({ repo }) => {
       handleSave();
     }
   };
-
+  if (styles) {
+    
+  }
   return (
-    <Card sx={{ marginBottom: 2 }}>
-      <CardContent>
-        <Typography variant="h6">
+    <Card className={styles.card}>
+      <CardContent className={styles.cardContent}>
+        <Typography variant="h6" className={styles.typographyTitle}>
           {isEditing ? (
             <TextField
               value={newName}
@@ -59,10 +62,10 @@ const RepoCard: React.FC<RepoCardProps> = observer(({ repo }) => {
             repo.name
           )}
         </Typography>
-        <Typography variant="body2" color="textSecondary">
+        <Typography variant="body2" className={styles.typographyBody}>
           {repo.ownerLogin}
         </Typography>
-        <Box sx={{ display: "flex", alignItems: "center", marginTop: 1 }}>
+        <Box className={styles.box}>
           <LazyImage 
             src={repo.ownerAvatarUrl}
             alt="Avatar"
@@ -70,10 +73,10 @@ const RepoCard: React.FC<RepoCardProps> = observer(({ repo }) => {
             width={40}
             height={40}
           />
-          <Button variant="outlined" size="small" href={repo.ownerUrl} target="_blank" sx={{ marginRight: 2 }}>
+          <Button variant="outlined" size="small" href={repo.ownerUrl} target="_blank" className={styles.buttonLink}>
             Перейти
           </Button>
-          <Button variant="contained" color="error" size="small" onClick={handleRemove}>
+          <Button variant="contained" color="error" size="small" className={styles.buttonDelete} onClick={handleRemove}>
             Удалить
           </Button>
           {isEditing ? (
@@ -82,11 +85,12 @@ const RepoCard: React.FC<RepoCardProps> = observer(({ repo }) => {
               color="success"
               size="small"
               onClick={handleSave}
+              className={styles.buttonSave}
             >
               Сохранить
             </Button>
           ) : (
-            <Button variant="contained" color="primary" size="small" onClick={handleEdit}>
+            <Button variant="contained" color="primary" size="small" className={styles.buttonSave} onClick={handleEdit}>
               Редактировать
             </Button>
           )}

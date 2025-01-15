@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { observer } from "mobx-react-lite";
 import { repoStore } from "../../stores/RepoStore";
 import { Box } from "@mui/material";
